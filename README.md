@@ -29,19 +29,30 @@ A quick bastion...
   region = "ap-southeast-2"
 }
 
+module "ssh_key" {
+  source = "git::https://github.com/marcelocorreia/terraform-aws-keypair.git?ref=master"
+  key_name = "bastion"
+  key_path = "/tmp/bastion"
+  create_key = true
+}
+
 module "bastion" {
   source = "../"
-  ami_source_owner = "123456789012"
-  vpc_name = "my-vpcnetwork"
-  ssh_key_name = "my-key"
+  ami_source_owner = "122455764658"
+  vpc_name = "my-vpc"
+  ssh_key_name = "${module.ssh_key.key_name}"
+
   bastion_sg_cidr = [
     "1.2.3.4/32",
-   ]
+  ]
   subnet_name_pattern = "subnet*public*a"
   bastion_ami_name_pattern = "ubuntu-base-*"
   name = "bastion"
-  policy_resources = ["*"]
-  policy_actions = ["s3:*"]
+  policy_resources = [
+    "*"]
+  policy_actions = [
+    "s3:*"]
+  bastion_userdata = "${file("custom_userdata.sh")}"
 }
 
 ```
@@ -50,6 +61,7 @@ module "bastion" {
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | ami\_source\_owner | AMI Source Owner | string | n/a | yes |
+| associate\_public\_ip\_address | Associate Public IP address | string | `"true"` | no |
 | bastion\_ami\_name\_pattern | Bastion's AMI Name Pattern | string | n/a | yes |
 | bastion\_instance\_type | Bastion's instance type | string | `"t2.micro"` | no |
 | bastion\_sg\_cidr | CIDR Range for inbound | list | `<list>` | no |
