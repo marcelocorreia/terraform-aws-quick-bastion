@@ -16,7 +16,7 @@ module "bastion" {
   ssh_key_name     = "${module.ssh_key.key_name}"
 
   bastion_sg_cidr = [
-    "1.2.3.4/32",
+    "1.2.3.4/32"
   ]
 
   subnet_name_pattern      = "subnet*public*a"
