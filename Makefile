@@ -1,21 +1,24 @@
-AWS_PROFILE ?= lone
+AWS_PROFILE ?= badwolf-labs
 
 
-init: _creds
+init: _creds fmt
 	cd example && terraform init
+get:
+	cd example && terraform get
 
 plan: _creds init
-	cd example && terraform plan --var allowed_ips_cidr=$(ALLOWED_IPS_CIDR)
+	cd example && terraform plan
 
 apply: _creds
-	cd example && terraform apply --auto-approve --var allowed_ips_cidr=$(ALLOWED_IPS_CIDR)
+	cd example && terraform apply --auto-approve
 
 destroy: _creds init empty-logs-bucket
-	cd example && terraform destroy --auto-approve --var allowed_ips_cidr=$(ALLOWED_IPS_CIDR)
+	cd example && terraform destroy --auto-approve
 
 state:
 	cd example && terraform state list
-
+fmt:
+	terraform fmt
 
 _creds:
 	$(eval export AWS_PROFILE=$(AWS_PROFILE))

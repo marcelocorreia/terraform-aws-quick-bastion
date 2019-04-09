@@ -1,9 +1,15 @@
 locals {
-  userdata = "${var.bastion_userdata == "" ? file("${path.module}/userdata.sh") : var.bastion_userdata}"
+  userdata_default = "${file(format("%s/%s",path.module,"/userdata.sh"))}"
+}
+
+variable "associate_public_ip_address" {
+  default     = true
+  description = "Associate Public IP address"
 }
 
 variable "bastion_userdata" {
-  default = ""
+  default     = ""
+  description = "Path to userdata file"
 }
 
 variable "bastion_ami_name_pattern" {
@@ -13,43 +19,50 @@ variable "bastion_ami_name_pattern" {
 variable "ami_source_owner" {
   description = "AMI Source Owner"
 }
+
 variable "subnet_name_pattern" {
-  default = ""
+  default     = ""
+  description = "Subnet name for lookup"
 }
 
 variable "bastion_instance_type" {
-  default = "t2.micro"
+  default     = "t2.micro"
+  description = "Bastion's instance type"
 }
 
-variable "name" {}
+variable "name" {
+  description = "Bastion's instance name"
+}
 
-variable "ssh_key_name" {}
+variable "ssh_key_name" {
+  description = "SSH Key name"
+}
 
 variable "bastion_sg_cidr" {
-  default = []
-  type = "list"
+  default     = []
+  type        = "list"
+  description = "CIDR Range for inbound"
 }
 
 variable "vpc_name" {
-  default = ""
+  default     = ""
+  description = "VPC name for lookup"
 }
 
 variable "tags" {
-  default = {}
-  type = "map"
+  default     = {}
+  type        = "map"
+  description = "Default tags"
 }
 
 variable "policy_resources" {
-  default = []
-  type = "list"
+  default     = []
+  type        = "list"
+  description = "List of IAM policy resources for the bastion"
 }
 
 variable "policy_actions" {
-  default = []
-  type = "list"
+  default     = []
+  type        = "list"
+  description = "List of IAM policy actions for the bastion"
 }
-
-variable "associate_public_ip_address" {
-  default = "true"
-}
-
