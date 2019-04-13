@@ -23,9 +23,10 @@ description: |
   A quick bastion...
 
 shields:
-  - https://img.shields.io/github/forks/{{ .github_user }}/terraform-aws-quick-bastion.svg?flat-square
   - https://img.shields.io/github/release/{{ .github_user }}/terraform-aws-quick-bastion.svg?flat-square
-
+  - https://img.shields.io/github/languages/count/{{ .github_user }}/terraform-aws-quick-bastion.svg
+  - https://img.shields.io/github/languages/top/{{ .github_user }}/terraform-aws-quick-bastion.svg
+#  - https://img.shields.io/github/forks/{{ .github_user }}/terraform-aws-quick-bastion.svg?flat-square
 tldr:
   - '[Overview](#overview)'
   - '[Description](#description)'

@@ -27,5 +27,10 @@ _sleep:
 	cowsay -f mario Waiting $(WAIT_FOR_STACK) seconds, Hope the stack will be up...
 	sleep $(WAIT_FOR_STACK)
 
+SCAFOLD := badwolf
+_readme:
+	$(SCAFOLD) generate --resource-type readme .
+
+
 
 

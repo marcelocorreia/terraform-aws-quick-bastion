@@ -2,8 +2,9 @@
 # terraform-aws-quick-bastion
 [![Badwolf][logo]](https://your.website.com)
 ---
-[![shield](https://img.shields.io/github/forks/marcelocorreia/terraform-aws-quick-bastion.svg?flat-square)](https://img.shields.io/github/forks/marcelocorreia/terraform-aws-quick-bastion.svg?flat-square)
 [![shield](https://img.shields.io/github/release/marcelocorreia/terraform-aws-quick-bastion.svg?flat-square)](https://img.shields.io/github/release/marcelocorreia/terraform-aws-quick-bastion.svg?flat-square)
+[![shield](https://img.shields.io/github/languages/count/marcelocorreia/terraform-aws-quick-bastion.svg)](https://img.shields.io/github/languages/count/marcelocorreia/terraform-aws-quick-bastion.svg)
+[![shield](https://img.shields.io/github/languages/top/marcelocorreia/terraform-aws-quick-bastion.svg?logo=amazon-aws)](https://img.shields.io/github/languages/top/marcelocorreia/terraform-aws-quick-bastion.svg?logo=amazon-aws)
 ---
 ### TLDR;
 - [Overview](#overview)
