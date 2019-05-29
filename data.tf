@@ -18,15 +18,34 @@ data "template_file" "bastion_userdata" {
   template = "${var.bastion_userdata == "" ? local.userdata_default : var.bastion_userdata}"
 }
 
-data "aws_subnet_ids" "subnet" {
+
+//data "aws_subnet" "subnet" {
+//  vpc_id = "${data.aws_vpc.vpc.id}"
+//  filter {
+//    name = "tag:Name"
+//
+//    values = [
+//      "${var.subnet_name_pattern}",
+//    ]
+//  }
+//}
+//data "aws_subnet_ids" "subnet" {
+//  vpc_id = "${data.aws_vpc.vpc.id}"
+//
+//  filter {
+//    name = "tag:Name"
+//
+//    values = [
+//      "${var.subnet_name_pattern}",
+//    ]
+//  }
+//}
+
+data "aws_subnet" "subnet" {
   vpc_id = "${data.aws_vpc.vpc.id}"
-
   filter {
-    name = "tag:Name"
-
-    values = [
-      "${var.subnet_name_pattern}",
-    ]
+    name   = "tag:Name"
+    values = ["${var.subnet_name_pattern}"] # insert value here
   }
 }
 
@@ -43,15 +62,9 @@ data "aws_vpc" "vpc" {
 data "aws_iam_policy_document" "instance_profile" {
   statement {
     sid = "InstanceProfile"
-
-    resources = [
-      "${var.policy_resources}",
-    ]
-
-    actions = [
-      "${var.policy_actions}",
-    ]
-
+    resources = "${var.policy_resources}"
+    actions = "${var.policy_actions}"
     effect = "Allow"
   }
+
 }

@@ -6,7 +6,7 @@ resource "aws_instance" "bastion" {
     "${aws_security_group.bastion.id}",
   ]
 
-  subnet_id                   = "${data.aws_subnet_ids.subnet.ids[0]}"
+  subnet_id                   = "${data.aws_subnet.subnet.id}"
   key_name                    = "${var.ssh_key_name}"
   user_data                   = "${data.template_file.bastion_userdata.rendered}"
   iam_instance_profile        = "${aws_iam_instance_profile.deployment.id}"
@@ -48,9 +48,8 @@ resource "aws_security_group" "bastion" {
     protocol  = "-1"
     to_port   = 0
 
-    cidr_blocks = [
-      "${var.bastion_sg_cidr}",
-    ]
+    cidr_blocks = "${var.bastion_sg_cidr}"
+
   }
 
   egress {
