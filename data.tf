@@ -18,29 +18,6 @@ data "template_file" "bastion_userdata" {
   template = "${var.bastion_userdata == "" ? local.userdata_default : var.bastion_userdata}"
 }
 
-
-//data "aws_subnet" "subnet" {
-//  vpc_id = "${data.aws_vpc.vpc.id}"
-//  filter {
-//    name = "tag:Name"
-//
-//    values = [
-//      "${var.subnet_name_pattern}",
-//    ]
-//  }
-//}
-//data "aws_subnet_ids" "subnet" {
-//  vpc_id = "${data.aws_vpc.vpc.id}"
-//
-//  filter {
-//    name = "tag:Name"
-//
-//    values = [
-//      "${var.subnet_name_pattern}",
-//    ]
-//  }
-//}
-
 data "aws_subnet" "subnet" {
   vpc_id = "${data.aws_vpc.vpc.id}"
   filter {
