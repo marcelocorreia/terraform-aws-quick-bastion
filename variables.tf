@@ -1,5 +1,5 @@
 locals {
-  userdata_default = "${file(format("%s/%s",path.module,"/userdata.sh"))}"
+  userdata_default = file(format("%s/%s", path.module, "/userdata.sh"))
 }
 
 variable "associate_public_ip_address" {
@@ -36,6 +36,7 @@ variable "name" {
 
 variable "ssh_key_name" {
   description = "SSH Key name"
+  default     = ""
 }
 
 variable "bastion_sg_cidr" {
@@ -65,4 +66,14 @@ variable "policy_actions" {
   default     = []
   type        = "list"
   description = "List of IAM policy actions for the bastion"
+}
+variable "vpc_id" {
+  type        = string
+  description = "VPC ID"
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "Subnet ID"
+
 }
