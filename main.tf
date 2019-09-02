@@ -16,7 +16,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_iam_role" "instance_profile" {
-  //  name = "${var.name}"
+  name        = var.name
   description = var.name
 
   assume_role_policy = <<EOF
@@ -65,8 +65,13 @@ resource "aws_security_group" "bastion" {
   tags = merge(var.tags, map("Name", var.name))
 }
 
+resource "aws_iam_role_policy_attachment" "policy_att" {
+  policy_arn = aws_iam_policy.instance_profile.arn
+  role       = aws_iam_role.instance_profile.name
+}
+
 resource "aws_iam_policy" "instance_profile" {
-  //  name = "mcBastionAssume"
+  name = var.name
   policy = data.aws_iam_policy_document.instance_profile.json
 }
 
