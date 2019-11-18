@@ -65,10 +65,7 @@ resource "aws_security_group" "bastion" {
   tags = merge(var.tags, map("Name", var.name))
 }
 
-resource "aws_iam_role_policy_attachment" "policy_att" {
-  policy_arn = aws_iam_policy.instance_profile.arn
-  role       = aws_iam_role.instance_profile.name
-}
+
 
 resource "aws_iam_policy" "instance_profile" {
   name = var.name

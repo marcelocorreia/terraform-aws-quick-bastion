@@ -17,3 +17,19 @@ output "public_dns" {
 output "instance_profile" {
   value = aws_iam_instance_profile.deployment.name
 }
+
+output "role_arn" {
+  value = aws_iam_role.instance_profile.arn
+}
+
+output "role_name" {
+  value = aws_iam_role.instance_profile.name
+}
+
+output "bastion_arn" {
+  value = aws_instance.bastion.arn
+}
+
+output "instance_id" {
+  value = aws_instance.bastion.id
+}
