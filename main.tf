@@ -7,7 +7,7 @@ resource "aws_instance" "bastion" {
   ]
 
   subnet_id                   = var.subnet_id
-  key_name                    = var.ssh_key_name != "" ? var.ssh_key_name : aws_key_pair.keypair[0].key_name
+//  key_name                    = var.ssh_key_name != "" ? var.ssh_key_name : aws_key_pair.keypair[0].key_name
   user_data                   = data.template_file.bastion_userdata.rendered
   iam_instance_profile        = aws_iam_instance_profile.deployment.id
   associate_public_ip_address = var.associate_public_ip_address
@@ -75,16 +75,5 @@ resource "aws_iam_policy" "instance_profile" {
 resource "aws_iam_instance_profile" "deployment" {
   role = aws_iam_role.instance_profile.name
   name = var.name
-}
-
-resource "tls_private_key" "keypair" {
-  count     = var.ssh_key_name != "" ? 0 : 1
-  algorithm = "RSA"
-}
-
-resource "aws_key_pair" "keypair" {
-  count      = var.ssh_key_name != "" ? 0 : 1
-  public_key = tls_private_key.keypair[0].public_key_openssh
-  key_name   = "${var.name}-key-pair"
 }
 
