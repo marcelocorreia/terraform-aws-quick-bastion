@@ -7,25 +7,13 @@ variable "associate_public_ip_address" {
   description = "Associate Public IP address"
 }
 
-variable "bastion_userdata" {
+variable "userdata" {
   default     = ""
   description = "Path to userdata file"
 }
 
-variable "bastion_ami_name_pattern" {
-  description = "Bastion's AMI Name Pattern"
-}
 
-variable "ami_source_owner" {
-  description = "AMI Source Owner"
-}
-
-variable "subnet_name_pattern" {
-  default     = ""
-  description = "Subnet name for lookup"
-}
-
-variable "bastion_instance_type" {
+variable "instance_type" {
   default     = "t2.micro"
   description = "Bastion's instance type"
 }
@@ -39,9 +27,6 @@ variable "bastion_sg_cidr" {
   description = "CIDR Range for inbound"
 }
 
-variable "vpc_name" {
-  description = "VPC name for lookup"
-}
 
 variable "tags" {
   default     = {}
@@ -49,14 +34,14 @@ variable "tags" {
 }
 
 variable "policy_resources" {
-  default     = []
-  
+  default = []
+
   description = "List of IAM policy resources for the bastion"
 }
-
+variable "ami_id" {}
 variable "policy_actions" {
-  default     = []
-  
+  default = []
+
   description = "List of IAM policy actions for the bastion"
 }
 variable "vpc_id" {
@@ -67,5 +52,4 @@ variable "vpc_id" {
 variable "subnet_id" {
   type        = string
   description = "Subnet ID"
-
 }
