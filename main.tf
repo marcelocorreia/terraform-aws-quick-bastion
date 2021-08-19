@@ -14,10 +14,16 @@ resource "aws_instance" "bastion" {
   tags = merge(var.tags, { "Name" : var.name })
 }
 
+
+
 resource "aws_iam_role" "instance_profile" {
   name                = var.name
   description         = var.name
-  managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"]
+//  managed_policy_arns = [
+//    "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore",
+//    "arn:aws:iam::aws:policy/AmazonEC2FullAccess",
+//  ]
+  managed_policy_arns =local.managed_policy_arns
   assume_role_policy  = <<EOF
 {
   "Version": "2012-10-17",
@@ -68,6 +74,14 @@ resource "aws_security_group" "bastion" {
 
 resource "aws_iam_instance_profile" "deployment" {
   role = aws_iam_role.instance_profile.name
-  name = var.tags
+
 }
 
+resource "aws_iam_policy" "bastion" {
+  policy = data.aws_iam_policy_document.bastion.json
+}
+resource "aws_iam_policy_attachment" "bastion" {
+  name = aws_iam_policy.bastion.name
+  policy_arn = aws_iam_policy.bastion.arn
+  roles = [aws_iam_role.instance_profile.name]
+}

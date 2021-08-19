@@ -1,9 +1,13 @@
 locals {
   userdata_default = file(format("%s/%s", path.module, "/userdata.sh"))
+  managed_policy_arns = concat(var.managed_policy_arns,["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"])
+}
+variable "managed_policy_arns" {
+  default = []
 }
 
 variable "associate_public_ip_address" {
-  default     = true
+  default     = false
   description = "Associate Public IP address"
 }
 
