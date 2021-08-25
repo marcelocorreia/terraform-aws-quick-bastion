@@ -10,9 +10,8 @@
 - [Overview](#overview)
 - [Description](#description)
 - [Usage](#usage)
-- [Inputs](#inputs)
+- [Inputs](#terraform.md)
 
-- [License](#license)
 
 ### Overview
 A quick customisable bastion...

@@ -1,6 +1,5 @@
 locals {
   userdata_default = file(format("%s/%s", path.module, "/userdata.sh"))
-  managed_policy_arns = concat(var.managed_policy_arns,["arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"])
 }
 variable "managed_policy_arns" {
   default = []
@@ -15,7 +14,6 @@ variable "userdata" {
   default     = ""
   description = "Path to userdata file"
 }
-
 
 variable "instance_type" {
   default     = "t2.micro"
@@ -42,7 +40,9 @@ variable "policy_resources" {
 
   description = "List of IAM policy resources for the bastion"
 }
+
 variable "ami_id" {}
+
 variable "policy_actions" {
   default = []
 

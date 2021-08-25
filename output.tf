@@ -9,9 +9,11 @@ output "private_ip" {
 output "private_dns" {
   value = aws_instance.bastion.private_dns
 }
+
 output "managed_policy_arns" {
-  value = local.managed_policy_arns
+  value = var.managed_policy_arns
 }
+
 output "public_dns" {
   value = aws_instance.bastion.public_dns
 }
