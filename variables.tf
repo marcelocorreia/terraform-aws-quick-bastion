@@ -5,6 +5,8 @@ variable "managed_policy_arns" {
   default = []
 }
 
+variable "ssh_keypair" {}
+
 variable "associate_public_ip_address" {
   default     = false
   description = "Associate Public IP address"

@@ -5,7 +5,7 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = [
     aws_security_group.bastion.id,
   ]
-
+  key_name = var.ssh_keypair
   subnet_id                   = var.subnet_id
   user_data                   = data.template_file.bastion_userdata.rendered
   iam_instance_profile        = aws_iam_instance_profile.deployment.id
